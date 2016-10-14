@@ -1,3 +1,6 @@
+//variable to determine if the player wins or looses.
+var outcome;
+
 //object for the player character
 var player = {
     strength: 7,
@@ -8,7 +11,7 @@ var player = {
 
 //object for the enemies
 var enemy = function () {
-    var strenth;
+    var strength;
     var speed;
     var sanity;
     var knowledge;
@@ -63,19 +66,46 @@ var startGameHandler = function () {
             break;
         }
     }
+
     weaponStats();
 //now the adventure really starts with some exposition first.
     alert("You awake in a dark house. You don't know where you are or how you got there. You notice the floor and walls are covered in dirt and blood.");
     alert("You find a " + weapon + " sitting next to you and pick it up. It should be helpful. You need to find a way out so you look for a door and proceed through it.");
 //an enemy appears as the player passes through the door.
         
+var fleshBeast = new enemy();
+var zombie = new enemy();
+var ghost = new enemy();
+//established the current monsters stats
+function monsterAppears(currentEnemy, updateStrength, updateSpeed, updateSanity, updateKnowledge){
+    alert("A " + currentEnemy + "blocks your path! You must fight to get past.");
+}
+//tests the players stats against the monster
+function fight(){
+    if (player.strength >= enemy.strength){
+        alert("You use your " + weapon + "against the monster. It falls at your feet and you move on.");
+} else {
+        alert("you fight will all your might but to no avail. The monster has bested you.");
+        outcome = "lose";
+    }
+}
 
+//fight the monsters
+monsterAppears(fleshBeast, 7, 4, 2, 2);
+fight();
+monsterAppears(zombie, 4, 3, 1, 1);
+fight();
+monsterAppears(ghost, 6, 8, 8, 7);
+fight();
 
-
-
+//test if the player has won or lost
+    if (outcome == "win"){
+    alert("After a long hard night, you finally make it out of the house. You walk away tired and bloody hoping you never have to do that again.");
+} else if (outcome == "lose"){
+    alert("All your struggle has been for naught. You lie on the ground blood oozing from your wound thinking of the life you never had. You have died.");
+}
 
 }
-    
-
+//the game will start when you press the button
 startButton.addEventListener("click", startGameHandler);
 
